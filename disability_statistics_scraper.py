@@ -1,3 +1,5 @@
+# Script for scraping employment data off disabilitystatistics.org
+
 from selenium.webdriver import Chrome
 from selenium.webdriver import ChromeOptions
 from selenium.webdriver.support.ui import Select
