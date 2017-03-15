@@ -8,7 +8,7 @@ def expected_education(x,highest_educations_attained):
     for i in xrange(0,len(x)-1):
         sum += i * x[highest_educations_attained[i]]
     expected_value = sum/total
-    return highest_educations_attained[numpy.round(expected_value)]
+    return highest_educations_attained[int(numpy.round(expected_value))]
 
 #----------------------------------------------------------------------------------------------------------------------#
 
