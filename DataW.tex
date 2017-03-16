@@ -1,0 +1,119 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[paper=a4, fontsize=11pt]{scrartcl} % A4 paper and 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage{fourier} % Use the Adobe Utopia font for the document - comment this line to return to the LaTeX default
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,      
+	urlcolor=blue,}
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs - comment this line for an assignment with lots of text
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{CMPS 263} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Data Wrangling Procedure \\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Brady Goldman, James Byron, Jon Selberg} % Your name
+
+\date{\normalsize\today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+\section{Data Retrieval}
+
+\begin{itemize}
+	\item \textbf{System Requirements}
+	\begin{itemize}
+		\item Java SE Runtime Environment 8
+		\item Internet Explorer (Not Edge) or Mozilla Firefox
+	\end{itemize}
+	\item \textbf{Data Retrieval from ACS using DataFerrett}
+	\begin{itemize}
+			\item Before running DataFerrett, be sure to disable your popup blocker for  \url{https://dataferrett.census.gov} and allow Java to run in your browser.
+			\item Go to \url{https://dataferrett.census.gov/LaunchBetaDFA.html} and enter your ucsc email in the login popup.  Then click the top tab that says \textbf{Step1}.
+			\item From the left column, dropdown into the American Community Survey dataset, then dropdown into the Public Use Microdata Sample.  View variables from the 2015 dataset.
+			\item Only select the topic that says \textbf{Population}, then search the variables.
+			\item Double click variables with names DEAR, DEYE, DPHY, OCCP, SCHL, and WAGP.  Select all values for each varable with the exception of "Not in universe - missing" for DPHY.
+			\item Proceed to \textbf{Step2} tab.  Click button that says \textbf{Make A Table}.
+			\item Drag and drop OCCP variable to left-most column.  Then drag DEAR and WAGP in that order to the adjacent columns and Click the green button that says \textbf{GO Get Data}.  When the data has replaced the question mark placeholders, save the table as a .csv file.  Clear spreadsheet and repeat for DEYE and DPHY.
+			\item Drag and drop the OCCP variable in the left-most column again, but this time drag only SCHL to the column adjacent.  Generate data just like above and save to a file titled "education\_attained\_by\_occupation.csv".
+			\item Place each csv file in a folder labeled "data".
+	\end{itemize}
+\end{itemize}
+
+\section{Data Post-Processing}
+
+\begin{itemize}
+	\item \textbf{System Requirements}
+	\begin{itemize}
+		\item Python 2.7.x with numpy and pandas installed
+		\item Excel or Libre office
+	\end{itemize}
+	\item \textbf{Narrowing Education Categories}
+	\begin{itemize}
+		\item Open file "education\_attained\_by\_occupation.csv" in Libre office or Excel.  This should have counts for each highest level of education attained by occupation.  Group these into the following five categories: Less Than High School; High School; Some College; Bachelor Degree; and Master, PhD, or Professional Degree.
+		\item Sum counts from Columns D-S to obtain total by occupation for "Less than High School", Columns T-U for "High School", V-X for "Some College", Y for "Bachelors", and Z-AB for "Master, PhD, or Professional Degree".  Place these in the next five columns after the last.  
+	\end{itemize}
+	\item \textbf{Mapping expected highest level of education attained by occupation}
+	\begin{itemize}
+		\item To convert the counts for highest level of education attained to a label for each occupation, we compute the following expected value for each:
+		\begin{align*}
+		\frac{\sum_{i=0}^{4}{i*\text{Count}_i}}{\text{Total Count}}
+		\end{align*}
+		Where $i$ is the index corresponding to each category of highest degree obtained.  The result rounded to the nearest whole number will designate the corresponding category as the label.
+		\item Download and move expected\_education\_mapper.py just outside of the directory labeled "data".  Run script to generate csv file with categories mapped to each occupation.
+	\end{itemize}
+\end{itemize}
+
+\end{document}
