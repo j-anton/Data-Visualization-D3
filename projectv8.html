@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<title>D3 Page Template</title>
+		<title>Disability Employment</title>
 		<script type="text/javascript" src="d3v4/d3.min.js">
 		</script>
 		<style> 
@@ -40,10 +40,22 @@
 			
 		</style>
 </head>
-<body>
- 	<div id="title">
-		<h2>What are the advantages of education for a person with disabilities?</h2>
- 	</div>
+<body style="font-family: Arial, Sans-Serif">
+	<table width=1000 border=0 style="padding-bottom: 50px">
+		<tr>
+			<td>
+				<center><h2>What are the employment opportunities for a person with a disability?</h2></center>
+				<ul style="line-height: 1.25em">
+					<li style="padding-bottom:0.75em">There are plenty of employment opportunities for persons with physical, visual, or auditory disabilities.However, these opportunities vary by the type of disability.</li>
+					<li style="padding-bottom:0.75em">For auditory disabilities, there is a wide range of job opportunities at a low-medium salary range.</li>
+					<li style="padding-bottom:0.75em">Persons with a visual disability uniformly occupy around 2% of most job opportunities.</li>
+					<li style="padding-bottom:0.75em">With higher education, disabled persons can aspire to earn high salaries.</li>
+				</ul>
+			</td>
+		</tr>
+	</table>
+
+ 	<div id="title"></div>
 	<script type="text/javascript">
 		var w = 1000;
 		var h = 600;
@@ -77,12 +89,10 @@
 				['Graduate Degree',  4, 'GD'],
 		];
 		var circle_colors = [
-			d3.rgb(51, 90, 51),
-			d3.rgb(51,90,51).brighter(1),
-			//d3.rgb(51,900,51).brighter(1.5),
-			//d3.rgb(51,90,51).brighter(2),
-			d3.rgb(118, 203, 118),
-			d3.rgb(177, 236, 177)
+			d3.rgb(51, 90, 51).darker(0.6),
+			d3.rgb(51,90,51).brighter(0.8),
+			d3.rgb(51,90,56).brighter(1.9),
+			d3.rgb(51,90,58).brighter(2.7),
 		];
 
 		var hearData = [];
@@ -669,6 +679,15 @@
     });//close hearing  csv
 
 	</script>
-	
+		<table width=1000 border=0>
+		<tr>
+			<td><p>Project By: Jack Selberg, Brady Goldman, James Byron<br/>
+				CMPS 263, Winter 2017<br/>
+				Professor Suresh Lodha</p>
+			<h3>References</h3>
+			<p>Data collected from the American Community Survey, <a href="https://www.census.gov/programs-surveys/acs/">www.census.gov/programs-surveys/acs/</a>.</p>
+			</td>
+		</tr>
+	</table>
 </body>
 </html>
