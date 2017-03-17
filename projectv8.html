@@ -71,8 +71,8 @@
 		var graph_top_y = h-2*padding-30;
 		var graph_bot_y = padding;
 		var button_labels = [
-			['Disability'],
-			['Highest Education']
+			['Disability Type', 0],
+			['Average Education',1]
 		]
 		var ttip = [[]];
 		var ttip_ll = 0;
@@ -438,7 +438,7 @@
 				return button_x;
 			})
 	        .attr("y", function(d){
-	        	return padding + d[1]*30
+	        	return padding + d[1]*30+30
 	        })
 	        .attr("width", 20)
 	        .attr("border", 2)
@@ -473,7 +473,7 @@
 					return button_text_x;
 				})
 				.attr("y", function(d){
-					return padding + d[1]*30+13;
+					return padding + d[1]*30+13+30;
 				})
 				.attr("font-family", "sans-serif")
 		   		.attr("font-size", "11px")
@@ -511,7 +511,7 @@
 					return button_x;
 				})
 		        .attr("y", function(d){
-		        	return padding + (d[1]*30)+90;
+		        	return padding + (d[1]*30)+150;
 		        })
 		        .attr("width", 20)
 		        .attr("border", 2)
@@ -565,7 +565,7 @@
 					return button_text_x;
 				})
 				.attr("y", function(d){
-					return padding + (d[1]*30)+13+90;
+					return padding + (d[1]*30)+13+150;
 				})
 				.attr("class", function(d){
 						return "dis_button "+d[0];
@@ -593,23 +593,24 @@
 					
 				});	
 
-		   	/*	svg.selectAll("text.button_labels")
-		   		.data(button_labels)
-		   		.enter()
-		   		.append(text)
-		   		.text(function(d){
-					return d;
-				})
-				.attr("x", function(d){
-					return button_text_x;
-				})
-				.attr("y", function(d){
-					return padding + (d[1]*30)+13+90;
-				})
-				.attr("class", function(d){
-						return "button_labels "+d[0];
-
-				});*/
+		   		svg.selectAll("text.button_labels")
+		   			.data(button_labels)
+		   			.enter()
+		   			.append("text")
+		   			.text(function(d){
+						return d[0];
+					})
+					.attr("text-anchor","left")
+					.attr("x", function(d){
+						return button_x;
+						//button_text_x;
+					})
+					.attr("y", function(d){
+						return padding + 150*d[1]+13;
+					})
+					.attr("class", function(d){
+							return "button_labels "+d[0];
+					});
 
 /*
 		svg.selectAll("text")
