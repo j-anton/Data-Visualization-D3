@@ -238,12 +238,8 @@
 								100000, 120000, 140000, 
 								160000, 180000, 200000]);
 					
-					//.tickSizeInner([0,-h,-h,-h,-h,-h,-h,-h,-h,-h])
-					//.tickSizeOuter(0);
 		var yAxis = d3.axisLeft(yScale)
 					.tickFormat(formatPercent);
-
-
 
         svg.append("g").selectAll("circle")
         	.data(dataset)
@@ -410,13 +406,8 @@
      		    .attr("fill", "none");
 
     		})
-			/*.on("mousemove", function(){
-				return tooltip.style("top",
-   				 (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");})
-   			*/
+		
 			.on("mouseout", function(){
-				//svg.selectAll("rect.ttip_rect").style("visibility", "hidden");
-				//svg.selectAll("text.ttip_text").style("visibility", "hidden");
 				svg.selectAll("text.ttip_text").remove()
 				svg.selectAll("rect.ttip_rect").remove()
 				return;
@@ -612,37 +603,7 @@
 							return "button_labels "+d[0];
 					});
 
-/*
-		svg.selectAll("text")
-				.data(opts)
-				.enter()
-				.append("text")
-				.text(function(d){
-					return d[0];
-				})
-				.attr("x", function(d){
-					return w-button_size/2-2;
-				})
-				.attr("y", function(d){
-					return d[1]*30+13;
-				})
-				.attr("font-family", "sans-serif")
-		   		.attr("font-size", "11px")
-		   		.attr("fill", "red")
-		   		.style("text-anchor", "middle")
-		   		.style("cursor", "pointer")
-		   		.on('click', function(d1){
-		        	 if(d1[2]=='visData'){
-		        		updateCircles(visData, d1);
-		        	}else if(d1[2]=='physData'){
-		        		updateCircles(physData, d1);
-		        	}else{
-		        		updateCircles(hearData, d1);
-		        	}
-				});		     
-					*/
 		svg.selectAll("rect.Physical").attr("fill", "silver");
-
 
 		/*
 		SETTING X and Y AXIS and LABELS 
